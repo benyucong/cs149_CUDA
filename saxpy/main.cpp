@@ -20,6 +20,16 @@ void usage(const char* progname) {
     printf("  -?  --help             This message\n");
 }
 
+bool check(int N, float alpha, float *xarray, float *yarray,
+           float *resultarray) {
+    for (int i = 0; i < N; i++) {
+      float expected = xarray[i] * alpha + yarray[i];
+      if (abs(resultarray[i] - expected) > 1e-5) {
+        return false;
+      }
+    }
+    return true;
+}
 
 int main(int argc, char** argv)
 {
@@ -65,6 +75,11 @@ int main(int argc, char** argv)
 
     for (int i=0; i<3; i++) {
       saxpyCuda(N, alpha, xarray, yarray, resultarray);
+      if (check(N, alpha, xarray, yarray, resultarray)) {
+            printf("Passed!\n");
+      } else {
+            printf("Wrong answer!\n");
+      }
     }
 
     delete [] xarray;
