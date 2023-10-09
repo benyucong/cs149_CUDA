@@ -73,9 +73,9 @@ int main(int argc, char** argv)
 
     printCudaInfo();
 
-    for (int i=0; i<3; i++) {
-      saxpyCuda(N, alpha, xarray, yarray, resultarray);
-      if (check(N, alpha, xarray, yarray, resultarray)) {
+    for (int i = 0; i < 10; i++) {
+        saxpyCuda(N, alpha, xarray, yarray, resultarray);
+        if (check(N, alpha, xarray, yarray, resultarray)) {
             printf("Passed!\n");
       } else {
             printf("Wrong answer!\n");
